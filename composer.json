@@ -1,0 +1,24 @@
+{
+    "name": "79211/nginx_lab_8",
+    "authors": [
+        {
+            "name": "TimonMax",
+            "email": "timonmaxu@gmail.com"
+        }
+    ],
+    "require": {
+        "php-amqplib/php-amqplib": "^3.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "11.5",
+        "guzzlehttp/guzzle": "7.8"
+    },
+    "config": {
+        "platform": {
+            "ext-sockets": "1.0.0"
+        }
+    },
+    "scripts": {
+        "test": "phpunit --bootstrap tests/bootstrap.php tests"
+    }
+}
