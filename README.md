@@ -9,12 +9,12 @@
 
 ## 📌 Описание задания
 Научиться
-1. устанавливать и использовать PHPUnit
-2. писать unit-тесты для классов
-3. использовать mock-объекты
-4. тестировать HTTP-запросы через Guzzle
-5. работать с переменными окружения (.env)
-6. изолировать тестовую среду
+1. настраивать CI/CD pipeline
+2. использовать GitHub Actions
+3. запускать Docker-контейнеры в CI
+4. автоматически запускать тесты PHPUnit
+5. выявлять ошибки через CI
+
 http://localhost:8080
 
 ---
@@ -23,8 +23,8 @@ http://localhost:8080
 
 ### 1. Клонировать репозиторий
 ```bash
-git clone https://github.com/TimonMax/nginx_lab_8.git
-cd nginx_lab_8
+git clone https://github.com/TimonMax/nginx_lab_9.git
+cd nginx_lab_9
 ```
 ### 2. Запустить контейнеры Docker
 ```bash
@@ -40,11 +40,11 @@ http://localhost:15672
 ```
 ### 5. Запустить worker для обработки сообщений
 ```bash
-docker exec -it lab7_php php www/worker.php
+docker exec -it lab8_php php www/worker.php
 ```
 ### 6. Запустить тесты
 ```bash
-docker exec -it lab7_php php www/worker.php
+vendor/bin/phpunit --bootstrap tests/bootstrap.php tests
 ```
 ### Содержимое .env.test
 ```bash
@@ -66,6 +66,16 @@ Time: 00:00.211, Memory: 10.00 MB
 
 OK (6 tests, 16 assertions)
 ```
+### Проверка работы
+Чтобы убедиться, что CI действительно отслеживает ошибки, можно специально сломать тест, например заменить:
+```bash
+$this->assertEquals(2, 1 + 1);
+```
+най
+```bash
+$this->assertEquals(2, 1 + 2);
+```
+после чего сделать коммит (в целом необязательно, так как в репозитории уже есть различные примеры того, как отлавливаются ошибки от неправильно написанного CI до прохождения тестов с ошибками)
 ## Содержимое проекта
 ```docker-compose.yml``` — описание сервисов
 
@@ -98,3 +108,5 @@ OK (6 tests, 16 assertions)
 ```tests/HttpMockTest.php``` — EnvTest.php
 
 ```tests/EnvTest.php``` — проверка переменных окружения
+
+```github/workflows/ci.yml``` — CI pipeline для GitHub Actions
