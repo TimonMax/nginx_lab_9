@@ -1,7 +1,8 @@
 FROM php:8.5-fpm
 
-RUN apt-get update && apt-get install -y zip unzip git curl libxml2-dev libonig-dev \
-    && docker-php-ext-install sockets pdo pdo_mysql mbstring xml xmlwriter dom \
+RUN apt-get update && apt-get install -y \
+    zip unzip git curl \
+    && docker-php-ext-install sockets pdo pdo_mysql \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
