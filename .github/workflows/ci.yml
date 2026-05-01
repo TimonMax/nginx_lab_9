@@ -20,7 +20,7 @@ jobs:
         run: docker compose exec -T php composer install --no-interaction --prefer-dist
 
       - name: Run tests
-        run: docker compose exec -T php vendor/bin/phpunit --bootstrap tests/bootstrap.php tests
+        run: docker compose exec -T php php vendor/bin/phpunit --bootstrap tests/bootstrap.php tests
 
       - name: Stop containers
         if: always()
