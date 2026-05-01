@@ -16,6 +16,16 @@ jobs:
       - name: Start docker
         run: docker compose up -d --build
 
+      - name: Prepare test env
+        run: |
+          cat > .env.test <<'EOF'
+          APP_URL=http://nginx
+          DB_HOST=db
+          DB_NAME=test_db
+          DB_USER=test_user
+          DB_PASSWORD=test_pass
+          EOF
+
       - name: Install dependencies
         run: docker compose exec -T php composer install --no-interaction --prefer-dist
 
